@@ -2,6 +2,11 @@
 
 namespace App\Providers;
 
+use App\Models\Task;
+use App\Observers\TaskObserver;
+use App\Services\AnthropicService;
+use App\Services\SubtaskService;
+use App\Services\TaskService;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -11,7 +16,15 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        //
+        $this->app->singleton('task.manager', function ($app) {
+            return new TaskService(
+                $app->make(SubtaskService::class)
+            );
+        });
+
+        $this->app->singleton(AnthropicService::class, function ($app) {
+            return new AnthropicService();
+        });
     }
 
     /**
@@ -19,6 +32,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        Task::observe(TaskObserver::class);
     }
 }

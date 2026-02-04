@@ -6,27 +6,17 @@ use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Log;
 
-class TaskNotFoundException extends Exception
+class AnthropicApiException extends Exception
 {
-    /**
-     * The exception message.
-     */
-    protected $message = 'Task not found';
-
-    /**
-     * The exception code.
-     */
-    protected $code = 404;
-
     /**
      * Render the exception as an HTTP response.
      */
     public function render($request): JsonResponse
     {
         return response()->json([
-            'error' => 'Not Found',
+            'error' => 'AI Service Error',
             'message' => $this->getMessage(),
-        ], $this->code);
+        ], $this->getCode() ?: 500);
     }
 
     /**
@@ -34,10 +24,10 @@ class TaskNotFoundException extends Exception
      */
     public function report(): void
     {
-        // Optionally log the exception
-        Log::info('Task not found exception', [
+        Log::error('Anthropic API Exception', [
             'message' => $this->getMessage(),
-            'user_id' => auth()->id(),
+            'code' => $this->getCode(),
+            'trace' => $this->getTraceAsString(),
         ]);
     }
 }

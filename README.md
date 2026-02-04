@@ -1,120 +1,202 @@
-# TaskBreakdown AI - AI-Powered Task Management System
+# TaskBreakdown AI - Complete Project README
 
-## 🚀 Project Overview
+![Laravel](https://img.shields.io/badge/Laravel-12-red)
+![PHP](https://img.shields.io/badge/PHP-8.1+-blue)
+![React](https://img.shields.io/badge/React-18-61dafb)
+![License](https://img.shields.io/badge/license-MIT-green)
 
-TaskBreakdown AI is a full-stack task management application that leverages AI to automatically break down complex tasks into actionable subtasks. Built with Laravel 12 and React 18, it demonstrates modern software architecture patterns and best practices.
+> AI-powered task management system that automatically breaks down complex tasks into actionable subtasks using Anthropic's Claude API.
 
-### Key Features
+---
 
-- **Smart Task Management**: Create, update, and track tasks with priorities and deadlines
-- **AI-Powered Breakdown**: Automatically decompose complex tasks using Anthropic's Claude API
-- **Subtask Tracking**: Manage subtasks with progress indicators and time estimates
-- **Real-time Updates**: Background job processing with queue system
-- **User Authentication**: Secure authentication using Laravel Sanctum
+## 📋 Table of Contents
+
+- [Overview](#overview)
+- [Features](#features)
+- [Tech Stack](#tech-stack)
+- [Architecture](#architecture)
+- [Prerequisites](#prerequisites)
+- [Installation](#installation)
+- [Configuration](#configuration)
+- [Running the Application](#running-the-application)
+- [API Documentation](#api-documentation)
+- [Testing](#testing)
+- [Project Structure](#project-structure)
+- [Development Workflow](#development-workflow)
+- [Deployment](#deployment)
+- [Troubleshooting](#troubleshooting)
+- [Contributing](#contributing)
+- [License](#license)
+
+---
+
+## 🎯 Overview
+
+TaskBreakdown AI is a full-stack task management application that leverages artificial intelligence to help teams and individuals break down complex tasks into manageable subtasks. Built with Laravel 12 and React 18, it demonstrates modern software architecture patterns including service layers, event-driven design, and queue-based processing.
+
+### Key Capabilities
+
+- **Smart Task Management**: Create, organize, and track tasks with priorities and deadlines
+- **AI-Powered Breakdown**: Automatically decompose complex tasks using Claude AI
+- **Real-time Updates**: Background processing with queue workers and event broadcasting
+- **Secure Authentication**: Token-based API authentication with Laravel Sanctum
 - **Beautiful UI**: Modern, responsive interface built with React and Tailwind CSS
-- **RESTful API**: Well-structured API with proper validation and error handling
 
-## 🏗️ Architecture
+---
 
-### Tech Stack
+## ✨ Features
 
-**Backend:**
-- PHP 8.1+
-- Laravel 12
-- MySQL 8.0
-- Redis (Queue & Cache)
-- Laravel Sanctum (API Authentication)
+### Core Features
 
-**Frontend:**
-- React 18
-- Vite
-- TailwindCSS
-- React Query
-- React Router
-- Axios
+- ✅ **User Authentication & Authorization**
+  - Registration and login
+  - JWT token-based API authentication
+  - Role-based access control with policies
+  
+- ✅ **Task Management**
+  - CRUD operations for tasks
+  - Status tracking (Pending, In Progress, Completed, Cancelled)
+  - Priority levels (Low, Medium, High, Urgent)
+  - Due date management
+  - Soft deletes for data recovery
 
-**AI Integration:**
-- Anthropic Claude API (Sonnet 4)
+- ✅ **AI Integration**
+  - Automatic task breakdown using Anthropic Claude API
+  - Customizable complexity levels
+  - Focus area specification
+  - Estimated time per subtask
 
-### Architecture Decisions
+- ✅ **Subtask Management**
+  - Create, edit, and delete subtasks
+  - Drag-and-drop reordering
+  - Progress tracking
+  - Time estimation
 
-1. **Service Pattern**: Business logic separated from controllers for better testability and reusability
-2. **Repository Pattern**: Data access abstracted through Eloquent models with relationships
-3. **Request Validation**: Dedicated Form Request classes for input validation
-4. **API Resources**: Consistent JSON response formatting
-5. **Event-Driven Architecture**: Decoupled operations using Laravel events
-6. **Queue System**: Async processing for AI operations to prevent blocking
-7. **Proper Exception Handling**: Custom exception classes with appropriate HTTP responses
+- ✅ **Notifications**
+  - Email notifications for task events
+  - Database notifications
+  - Real-time browser notifications (via broadcasting)
 
-## 📁 Project Structure
+- ✅ **Search & Filtering**
+  - Full-text search
+  - Filter by status, priority
+  - Pagination support
+
+### Advanced Features
+
+- 📊 **Analytics Dashboard** (Planned)
+- 👥 **Team Collaboration** (Planned)
+- 📱 **Mobile App** (Planned)
+- 🔄 **Task Dependencies** (Planned)
+
+---
+
+## 🛠 Tech Stack
+
+### Backend
+
+| Technology | Version | Purpose |
+|------------|---------|---------|
+| PHP | 8.1+ | Programming Language |
+| Laravel | 12.x | Web Framework |
+| MySQL | 8.0+ | Primary Database |
+| Redis | 7.x | Queue & Cache |
+| Laravel Sanctum | 4.x | API Authentication |
+
+### Frontend
+
+| Technology | Version | Purpose |
+|------------|---------|---------|
+| React | 18.x | UI Framework |
+| Vite | 5.x | Build Tool |
+| TailwindCSS | 3.x | Styling |
+| React Query | 5.x | Data Fetching |
+| React Router | 6.x | Routing |
+| Axios | 1.x | HTTP Client |
+
+### AI & Services
+
+| Technology | Purpose |
+|------------|---------|
+| Anthropic Claude API | Task Breakdown AI |
+| Laravel Queue | Background Jobs |
+| Laravel Events | Event-Driven Architecture |
+
+---
+
+## 🏗 Architecture
+
+### Design Patterns
+
+1. **Service Pattern**: Business logic separated from controllers
+2. **Repository Pattern**: Data access abstraction via Eloquent
+3. **Event-Driven Architecture**: Decoupled operations using events
+4. **Observer Pattern**: Model lifecycle hooks
+5. **Facade Pattern**: Simplified service access
+6. **Strategy Pattern**: Flexible AI prompt building
+
+### Key Architectural Decisions
+
+- **API-First Design**: RESTful API with separate React frontend
+- **Queue-Based Processing**: Long-running AI operations handled asynchronously
+- **Comprehensive Validation**: Form Request classes for all inputs
+- **Resource Transformers**: Consistent API responses
+- **Exception Handling**: Custom exceptions for different error scenarios
+
+### System Flow
 
 ```
-task-management-system/
-├── task-management-api/          # Laravel Backend
-│   ├── app/
-│   │   ├── Console/
-│   │   │   └── Commands/         # Custom artisan commands
-│   │   ├── Events/               # Application events
-│   │   ├── Exceptions/           # Custom exceptions
-│   │   ├── Facades/              # Service facades
-│   │   ├── Http/
-│   │   │   ├── Controllers/      # API controllers
-│   │   │   ├── Requests/         # Form request validators
-│   │   │   └── Resources/        # API response resources
-│   │   ├── Jobs/                 # Queue jobs
-│   │   ├── Listeners/            # Event listeners
-│   │   ├── Models/               # Eloquent models
-│   │   ├── Notifications/        # User notifications
-│   │   └── Services/             # Business logic services
-│   ├── config/                   # Configuration files
-│   ├── database/
-│   │   ├── migrations/           # Database migrations
-│   │   ├── factories/            # Model factories
-│   │   └── seeders/              # Database seeders
-│   ├── routes/
-│   │   └── api.php              # API routes
-│   └── tests/                    # Feature & unit tests
-│
-└── task-management-frontend/     # React Frontend
-    ├── src/
-    │   ├── api/                  # API client & endpoints
-    │   ├── components/
-    │   │   ├── auth/            # Authentication components
-    │   │   ├── common/          # Reusable components
-    │   │   └── tasks/           # Task-related components
-    │   ├── contexts/            # React contexts
-    │   ├── hooks/               # Custom React hooks
-    │   ├── pages/               # Page components
-    │   └── utils/               # Utility functions
-    └── public/                  # Static assets
+User Request → Controller → Service Layer → Model/Repository
+                                ↓
+                         Event Dispatcher
+                                ↓
+                         Queue Job (if async)
+                                ↓
+                    External Services (AI API)
+                                ↓
+                         Database Update
+                                ↓
+                    Notification Dispatch
 ```
 
-## 🚦 Quick Start
+---
 
-### Prerequisites
+## 📦 Prerequisites
 
-- PHP 8.1 or higher
-- Composer
-- Node.js 18+ & npm
-- MySQL 8.0
-- Redis
-- Anthropic API Key (get from https://console.anthropic.com)
+Before you begin, ensure you have the following installed:
 
-### Installation
+- **PHP** >= 8.1
+- **Composer** >= 2.0
+- **Node.js** >= 18.x
+- **npm** >= 9.x
+- **MySQL** >= 8.0
+- **Redis** >= 7.0
+- **Git**
 
-#### 1. Clone Repository
+### Optional but Recommended
+
+- **Docker** (for containerized development)
+- **Mailpit** (for local email testing)
+- **Laravel Valet** or **Homestead** (for macOS/Windows)
+
+---
+
+## 🚀 Installation
+
+### Step 1: Clone the Repository
+
 ```bash
-git clone https://github.com/babarnaawaz/task-management-Ai.git
-cd task-management-system
+git clone https://github.com/yourusername/task-breakdown-ai.git
+cd task-breakdown-ai
 ```
 
-#### 2. Backend Setup
+### Step 2: Backend Setup
 
 ```bash
 # Navigate to backend
 cd task-management-api
 
-# Install dependencies
+# Install PHP dependencies
 composer install
 
 # Copy environment file
@@ -123,13 +205,10 @@ cp .env.example .env
 # Generate application key
 php artisan key:generate
 
-# Configure .env file
-# Update the following:
-DB_DATABASE=task_management
-DB_USERNAME=root
-DB_PASSWORD=your_password
-ANTHROPIC_API_KEY=your_api_key_here
-QUEUE_CONNECTION=redis
+# Configure your database in .env
+# DB_DATABASE=task_management
+# DB_USERNAME=root
+# DB_PASSWORD=your_password
 
 # Create database
 mysql -u root -p
@@ -139,74 +218,181 @@ EXIT;
 # Run migrations
 php artisan migrate
 
-# Seed database (optional)
+# Seed the database (optional)
 php artisan db:seed
 
 # Create notifications table
 php artisan notifications:table
 php artisan migrate
+
+# Link storage (if using file uploads)
+php artisan storage:link
 ```
 
-#### 3. Frontend Setup
+### Step 3: Frontend Setup
 
 ```bash
 # Navigate to frontend
 cd ../task-management-frontend
 
-# Install dependencies
+# Install npm dependencies
 npm install
 
 # Copy environment file
 cp .env.example .env
+```
 
-# Configure if needed (default should work)
+---
+
+## ⚙️ Configuration
+
+### Backend Configuration
+
+#### 1. Database Configuration
+
+Edit `.env`:
+
+```env
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=task_management
+DB_USERNAME=root
+DB_PASSWORD=your_password
+```
+
+#### 2. Redis Configuration
+
+```env
+REDIS_HOST=127.0.0.1
+REDIS_PASSWORD=null
+REDIS_PORT=6379
+
+QUEUE_CONNECTION=redis
+CACHE_DRIVER=redis
+SESSION_DRIVER=redis
+```
+
+#### 3. Anthropic AI Configuration
+
+Get your API key from [Anthropic Console](https://console.anthropic.com)
+
+```env
+ANTHROPIC_API_KEY=your_anthropic_api_key_here
+ANTHROPIC_MODEL=claude-sonnet-4-20250514
+ANTHROPIC_MAX_TOKENS=4096
+```
+
+#### 4. Mail Configuration
+
+For local development, use Mailpit:
+
+```env
+MAIL_MAILER=smtp
+MAIL_HOST=127.0.0.1
+MAIL_PORT=1025
+MAIL_USERNAME=null
+MAIL_PASSWORD=null
+MAIL_ENCRYPTION=null
+MAIL_FROM_ADDRESS="noreply@taskbreakdown.local"
+MAIL_FROM_NAME="TaskBreakdown AI"
+```
+
+For production, use a service like SendGrid, Mailgun, or Amazon SES.
+
+#### 5. CORS Configuration
+
+Edit `config/cors.php`:
+
+```php
+'allowed_origins' => [
+    'http://localhost:5173',  // React dev server
+    'http://localhost:3000',  // Alternative port
+    env('FRONTEND_URL'),      // Production URL
+],
+```
+
+### Frontend Configuration
+
+Edit `.env`:
+
+```env
 VITE_API_URL=http://localhost:8000/api
 ```
 
-### Running the Application
+---
 
-You'll need **4 terminal windows**:
+## 🏃 Running the Application
 
-#### Terminal 1 - Laravel Server
+You need **4 terminal windows** to run the complete application:
+
+### Terminal 1: Laravel Development Server
+
 ```bash
 cd task-management-api
 php artisan serve
-# Runs on http://localhost:8000
+
+# Server will run on http://localhost:8000
 ```
 
-#### Terminal 2 - Queue Worker
+### Terminal 2: Queue Worker
+
 ```bash
 cd task-management-api
-php artisan queue:work
-# Processes background jobs
+php artisan queue:work --tries=3
+
+# Processes background jobs for AI task breakdown
 ```
 
-#### Terminal 3 - Redis Server (if not running as service)
+### Terminal 3: Redis Server
+
 ```bash
+# If Redis is not running as a service
 redis-server
+
+# Or start as service (Linux)
+sudo systemctl start redis
+
+# Or start as service (macOS)
+brew services start redis
 ```
 
-#### Terminal 4 - React Dev Server
+### Terminal 4: React Development Server
+
 ```bash
 cd task-management-frontend
 npm run dev
-# Runs on http://localhost:5173
+
+# Server will run on http://localhost:5173
 ```
 
 ### Access the Application
 
 - **Frontend**: http://localhost:5173
-- **API**: http://localhost:8000/api
+- **Backend API**: http://localhost:8000/api
+- **API Documentation**: http://localhost:8000/api/documentation (if installed)
 
-### Default Test Account (after seeding)
-- Email: `test@example.com`
-- Password: `password123`
+### Default Test Account
+
+After seeding the database:
+
+- **Email**: test@example.com
+- **Password**: password123
+
+---
 
 ## 📚 API Documentation
 
+### Base URL
+
+```
+http://localhost:8000/api
+```
+
 ### Authentication Endpoints
 
-#### Register
+#### Register User
+
 ```http
 POST /api/register
 Content-Type: application/json
@@ -219,7 +405,21 @@ Content-Type: application/json
 }
 ```
 
+**Response:**
+```json
+{
+  "user": {
+    "id": 1,
+    "name": "John Doe",
+    "email": "john@example.com"
+  },
+  "token": "1|AbCdEf...",
+  "token_type": "Bearer"
+}
+```
+
 #### Login
+
 ```http
 POST /api/login
 Content-Type: application/json
@@ -231,12 +431,14 @@ Content-Type: application/json
 ```
 
 #### Logout
+
 ```http
 POST /api/logout
 Authorization: Bearer {token}
 ```
 
 #### Get Current User
+
 ```http
 GET /api/me
 Authorization: Bearer {token}
@@ -245,12 +447,20 @@ Authorization: Bearer {token}
 ### Task Endpoints
 
 #### List Tasks
+
 ```http
-GET /api/tasks?status=pending&priority=high&search=keyword
+GET /api/tasks?status=pending&priority=high&search=keyword&per_page=15
 Authorization: Bearer {token}
 ```
 
+**Query Parameters:**
+- `status` (optional): pending, in_progress, completed, cancelled
+- `priority` (optional): low, medium, high, urgent
+- `search` (optional): Search in title and description
+- `per_page` (optional): Items per page (default: 15)
+
 #### Create Task
+
 ```http
 POST /api/tasks
 Authorization: Bearer {token}
@@ -267,30 +477,35 @@ Content-Type: application/json
 ```
 
 #### Get Task
+
 ```http
 GET /api/tasks/{id}
 Authorization: Bearer {token}
 ```
 
 #### Update Task
+
 ```http
 PUT /api/tasks/{id}
 Authorization: Bearer {token}
 Content-Type: application/json
 
 {
+  "title": "Updated Title",
   "status": "in_progress",
   "priority": "urgent"
 }
 ```
 
 #### Delete Task
+
 ```http
 DELETE /api/tasks/{id}
 Authorization: Bearer {token}
 ```
 
 #### Request AI Breakdown
+
 ```http
 POST /api/tasks/{id}/breakdown
 Authorization: Bearer {token}
@@ -302,15 +517,25 @@ Content-Type: application/json
 }
 ```
 
+**Response:**
+```json
+{
+  "message": "Task breakdown request submitted. You will be notified when complete.",
+  "task_id": 1
+}
+```
+
 ### Subtask Endpoints
 
 #### List Subtasks
+
 ```http
 GET /api/tasks/{taskId}/subtasks
 Authorization: Bearer {token}
 ```
 
 #### Create Subtask
+
 ```http
 POST /api/tasks/{taskId}/subtasks
 Authorization: Bearer {token}
@@ -325,62 +550,133 @@ Content-Type: application/json
 ```
 
 #### Update Subtask
+
 ```http
 PUT /api/subtasks/{id}
 Authorization: Bearer {token}
 Content-Type: application/json
 
 {
-  "status": "completed"
+  "status": "completed",
+  "estimated_hours": 3
 }
 ```
 
 #### Delete Subtask
+
 ```http
 DELETE /api/subtasks/{id}
 Authorization: Bearer {token}
 ```
 
+---
+
 ## 🧪 Testing
 
-### Run Backend Tests
+### Run All Tests
+
 ```bash
 cd task-management-api
 php artisan test
 ```
 
-### Run Specific Test
+### Run Specific Test Suite
+
 ```bash
-php artisan test --filter TaskTest
+# Feature tests only
+php artisan test --testsuite=Feature
+
+# Unit tests only
+php artisan test --testsuite=Unit
+
+# Specific test file
+php artisan test tests/Feature/TaskTest.php
+
+# Specific test method
+php artisan test --filter test_user_can_create_task
 ```
 
-### Run with Coverage
+### Run Tests with Coverage
+
 ```bash
 php artisan test --coverage
 ```
 
-## 🛠️ Artisan Commands
+### Test Database
 
-### Custom Commands
+Tests use SQLite in-memory database by default. Configure in `phpunit.xml`:
 
-#### Clean Up Old Tasks
-```bash
-php artisan tasks:cleanup --days=90
-# Removes completed/cancelled tasks older than 90 days
+```xml
+<env name="DB_CONNECTION" value="sqlite"/>
+<env name="DB_DATABASE" value=":memory:"/>
 ```
 
-#### Generate Task Statistics
-```bash
-php artisan tasks:stats
-# Shows global statistics
+---
 
-php artisan tasks:stats --user=1
-# Shows statistics for specific user
+## 📁 Project Structure
+
+```
+task-management-system/
+├── task-management-api/              # Laravel Backend
+│   ├── app/
+│   │   ├── Console/
+│   │   │   └── Commands/             # Custom artisan commands
+│   │   ├── Events/                   # Event classes
+│   │   ├── Exceptions/               # Custom exceptions
+│   │   ├── Facades/                  # Service facades
+│   │   ├── Helpers/                  # Helper functions
+│   │   ├── Http/
+│   │   │   ├── Controllers/Api/      # API controllers
+│   │   │   ├── Middleware/           # Custom middleware
+│   │   │   ├── Requests/             # Form request validators
+│   │   │   └── Resources/            # API resources
+│   │   ├── Jobs/                     # Queue jobs
+│   │   ├── Listeners/                # Event listeners
+│   │   ├── Mail/                     # Mailable classes
+│   │   ├── Models/                   # Eloquent models
+│   │   ├── Notifications/            # Notification classes
+│   │   ├── Observers/                # Model observers
+│   │   ├── Policies/                 # Authorization policies
+│   │   ├── Rules/                    # Custom validation rules
+│   │   └── Services/                 # Business logic services
+│   ├── config/                       # Configuration files
+│   ├── database/
+│   │   ├── factories/                # Model factories
+│   │   ├── migrations/               # Database migrations
+│   │   └── seeders/                  # Database seeders
+│   ├── resources/
+│   │   └── views/                    # Blade templates (emails)
+│   ├── routes/
+│   │   └── api.php                   # API routes
+│   ├── storage/                      # File storage & logs
+│   └── tests/                        # PHPUnit tests
+│
+└── task-management-frontend/         # React Frontend
+    ├── public/                       # Static assets
+    └── src/
+        ├── api/                      # API client & endpoints
+        ├── components/
+        │   ├── auth/                 # Authentication components
+        │   ├── common/               # Reusable components
+        │   └── tasks/                # Task-related components
+        ├── contexts/                 # React contexts
+        ├── hooks/                    # Custom React hooks
+        ├── pages/                    # Page components
+        ├── utils/                    # Utility functions
+        ├── App.jsx                   # Main app component
+        └── main.jsx                  # Entry point
 ```
 
-### Useful Laravel Commands
+---
+
+## 🔧 Development Workflow
+
+### Artisan Commands
 
 ```bash
+# List all routes
+php artisan route:list
+
 # Clear all caches
 php artisan optimize:clear
 
@@ -390,125 +686,179 @@ php artisan migrate
 # Rollback last migration
 php artisan migrate:rollback
 
-# Fresh migration with seeding
-php artisan migrate:fresh --seed
+# Seed database
+php artisan db:seed
 
-# List all routes
-php artisan route:list
+# Create new controller
+php artisan make:controller Api/NewController
 
-# Tinker (REPL)
-php artisan tinker
+# Create new model with migration
+php artisan make:model NewModel -m
+
+# Create new service
+touch app/Services/NewService.php
+
+# Run queue worker
+php artisan queue:work
+
+# Cleanup old tasks (custom command)
+php artisan tasks:cleanup --days=90
+
+# Generate task statistics
+php artisan tasks:stats
 ```
 
-## 📊 Database Schema
+### Git Workflow
 
-### Users Table
-- id (primary key)
-- name
-- email (unique)
-- password
-- timestamps
-- soft deletes
+```bash
+# Create feature branch
+git checkout -b feature/new-feature
 
-### Tasks Table
-- id (primary key)
-- user_id (foreign key → users)
-- title
-- description
-- status (enum)
-- priority (enum)
-- due_date
-- ai_breakdown_requested (boolean)
-- ai_breakdown_completed_at
-- timestamps
-- soft deletes
+# Make changes and commit
+git add .
+git commit -m "Add new feature"
 
-### Subtasks Table
-- id (primary key)
-- task_id (foreign key → tasks)
-- title
-- description
-- status (enum)
-- order
-- estimated_hours
-- generated_by_ai (boolean)
-- timestamps
-- soft deletes
+# Push to remote
+git push origin feature/new-feature
 
-### Task Breakdowns Table
-- id (primary key)
-- task_id (foreign key → tasks)
-- status (enum)
-- ai_prompt
-- ai_response (json)
-- error_message
-- started_at
-- completed_at
-- timestamps
+# Create pull request on GitHub/GitLab
+```
 
-## 🔒 Security Features
+### Code Quality
 
-- Password hashing with bcrypt
-- CSRF protection
-- SQL injection prevention (via Eloquent ORM)
-- XSS protection
-- API token authentication
-- Request rate limiting
-- Input validation and sanitization
-- Authorized access control
+```bash
+# Run PHP CS Fixer (if installed)
+./vendor/bin/php-cs-fixer fix
 
-## 🎯 Laravel Standards & Best Practices
+# Run PHPStan (if installed)
+./vendor/bin/phpstan analyse
 
-### ✅ Implemented Standards
+# Run tests before committing
+php artisan test
+```
 
-1. **Request Classes**: All form validation in dedicated request classes
-2. **API Resources**: Consistent response formatting
-3. **Service Pattern**: Business logic separated from controllers
-4. **Proper Relationships**: Eloquent relationships properly defined
-5. **Events & Listeners**: Decoupled event-driven architecture
-6. **Notifications**: Email and database notifications
-7. **Queue Jobs**: Background processing for long tasks
-8. **Console Commands**: Custom artisan commands
-9. **Exception Handling**: Custom exception classes
-10. **Facades**: Service facades for clean access
-11. **Middleware**: Authentication and authorization
-12. **Database Migrations**: Version-controlled schema changes
-13. **Model Factories**: Test data generation
-14. **Seeders**: Database population
-15. **Soft Deletes**: Preserve deleted records
-16. **Type Hints**: Full PHP 8.1+ type declarations
-17. **Eloquent Scopes**: Reusable query logic
-18. **Feature Tests**: Comprehensive test coverage
+---
 
-## 🎨 Frontend Features
+## 🚢 Deployment
 
-- **Modern React**: Hooks, Context API, Functional components
-- **State Management**: React Query for server state
-- **Routing**: React Router with protected routes
-- **Styling**: TailwindCSS utility-first approach
-- **Icons**: Lucide React icon library
-- **Notifications**: React Hot Toast
-- **Date Handling**: date-fns library
-- **API Integration**: Axios with interceptors
-- **Form Handling**: Controlled components
-- **Loading States**: Proper loading & error states
-- **Responsive Design**: Mobile-first approach
+### Production Checklist
+
+#### Backend
+
+1. **Environment Configuration**
+```bash
+# Set production environment
+APP_ENV=production
+APP_DEBUG=false
+APP_URL=https://yourdomain.com
+
+# Use production database
+DB_CONNECTION=mysql
+DB_DATABASE=production_db
+
+# Configure production cache/queue
+CACHE_DRIVER=redis
+QUEUE_CONNECTION=redis
+```
+
+2. **Optimize Application**
+```bash
+# Cache configuration
+php artisan config:cache
+
+# Cache routes
+php artisan route:cache
+
+# Cache views
+php artisan view:cache
+
+# Optimize autoloader
+composer install --optimize-autoloader --no-dev
+```
+
+3. **Set Permissions**
+```bash
+chmod -R 755 storage bootstrap/cache
+chown -R www-data:www-data storage bootstrap/cache
+```
+
+4. **Setup Supervisor for Queue Worker**
+
+Create `/etc/supervisor/conf.d/task-management-worker.conf`:
+
+```ini
+[program:task-management-worker]
+process_name=%(program_name)s_%(process_num)02d
+command=php /path/to/task-management-api/artisan queue:work --sleep=3 --tries=3
+autostart=true
+autorestart=true
+user=www-data
+numprocs=2
+redirect_stderr=true
+stdout_logfile=/path/to/task-management-api/storage/logs/worker.log
+```
+
+```bash
+sudo supervisorctl reread
+sudo supervisorctl update
+sudo supervisorctl start task-management-worker:*
+```
+
+#### Frontend
+
+1. **Build for Production**
+```bash
+cd task-management-frontend
+npm run build
+```
+
+2. **Deploy to Web Server**
+
+Upload the `dist/` folder to your web server or CDN.
+
+3. **Configure Nginx**
+
+```nginx
+server {
+    listen 80;
+    server_name yourdomain.com;
+
+    root /var/www/task-management-frontend/dist;
+    index index.html;
+
+    location / {
+        try_files $uri $uri/ /index.html;
+    }
+
+    location /api {
+        proxy_pass http://localhost:8000;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+    }
+}
+```
+
+---
 
 ## 🐛 Troubleshooting
 
-### Database Connection Error
-```bash
-# Verify MySQL is running
-sudo service mysql status
+### Common Issues
 
-# Check credentials in .env
-# Reset migrations if needed
+#### Database Connection Error
+
+```bash
+# Check MySQL is running
+sudo systemctl status mysql
+
+# Verify credentials in .env
+# Reset migrations
 php artisan migrate:fresh
 ```
 
-### Queue Not Processing
+#### Queue Not Processing
+
 ```bash
-# Ensure Redis is running
+# Check Redis is running
 redis-cli ping
 
 # Clear failed jobs
@@ -518,100 +868,87 @@ php artisan queue:flush
 php artisan queue:restart
 ```
 
-### CORS Issues
+#### CORS Errors
+
 ```bash
 # Clear config cache
 php artisan config:clear
 
 # Verify frontend URL in config/cors.php
-# Should include: http://localhost:5173
+# Check CORS headers in response
 ```
 
-### AI Breakdown Failing
+#### AI Breakdown Not Working
+
 ```bash
-# Check API key in .env
-# Verify queue worker is running
+# Verify API key in .env
+ANTHROPIC_API_KEY=sk-ant-...
+
+# Check queue worker is running
+ps aux | grep "queue:work"
+
 # Check logs
 tail -f storage/logs/laravel.log
 ```
 
-### Frontend Build Issues
+#### Frontend Build Issues
+
 ```bash
-# Clear and reinstall
+# Clear node modules
 rm -rf node_modules package-lock.json
+
+# Reinstall dependencies
 npm install
 
 # Clear Vite cache
 rm -rf node_modules/.vite
 ```
 
-## 📈 Performance Optimization
+---
 
-- Database indexing on frequently queried columns
-- Eager loading to prevent N+1 queries
-- Redis caching for sessions and queues
-- API response pagination
-- Database query optimization
-- Frontend code splitting (lazy loading ready)
-- Image optimization ready
+## 👥 Contributing
 
-## 🔮 Future Enhancements
+We welcome contributions! Please follow these steps:
 
-- [ ] Real-time updates with WebSockets
-- [ ] Team collaboration features
-- [ ] Task templates
-- [ ] File attachments
-- [ ] Time tracking
-- [ ] Kanban board view
-- [ ] Calendar integration
-- [ ] Mobile app (React Native)
-- [ ] Advanced reporting & analytics
-- [ ] Email reminders
-- [ ] Task dependencies
-- [ ] Dark mode
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
 
-## 📝 License
+### Coding Standards
 
-This project is created for educational and demonstration purposes.
+- Follow PSR-12 for PHP code
+- Use ESLint + Prettier for JavaScript/React
+- Write tests for new features
+- Update documentation
 
-## 👨‍💻 Development
+---
 
-### Code Style
+## 📄 License
 
-**Backend (PHP):**
-- PSR-12 coding standard
-- Laravel conventions
-- Type hints everywhere
-- DocBlocks for complex methods
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-**Frontend (JavaScript):**
-- ESLint + Prettier
-- React best practices
-- Functional components
-- Custom hooks for reusability
-
-### Git Workflow
-
-```bash
-# Feature development
-git checkout -b feature/task-filtering
-# ... make changes
-git commit -m "Add task filtering functionality"
-git push origin feature/task-filtering
-```
+---
 
 ## 🙏 Acknowledgments
 
-- Laravel Framework
-- React Team
-- Anthropic (Claude API)
-- TailwindCSS
+- [Laravel Framework](https://laravel.com)
+- [React](https://react.dev)
+- [Anthropic Claude API](https://www.anthropic.com)
+- [TailwindCSS](https://tailwindcss.com)
 - All open-source contributors
+
+---
+
+## 📞 Support
+
+- **Documentation**: [Full Documentation](./docs)
+- **Issues**: [GitHub Issues](https://github.com/yourusername/task-breakdown-ai/issues)
+- **Email**: support@taskbreakdown.com
 
 ---
 
 **Built with ❤️ using Laravel 12, React 18, and Claude AI**
 
-For detailed implementation steps, see:
-- `IMPLEMENTATION_GUIDE.md` - Complete backend setup
-- `IMPLEMENTATION_GUIDE_PART2.md` - Frontend and final configuration
+*TaskBreakdown AI - Making complex tasks manageable*
